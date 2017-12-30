@@ -1,0 +1,10 @@
+[filament]
+name = Fab2mini-Prusa-PETG-filament
+diameter = 1.75
+multiplierPercent = 77
+printingTemperature = 240
+enableCooling = True
+bedTemperature = 57
+fanSpeedMin = 50
+fanSpeedMax = 100
+minimalLayerTime = 5

@@ -1,0 +1,56 @@
+config
+----- connection ----
+Connection: Serial connection
+Port: /dev/ttyACM0
+Baud rate: 115200
+Transfer protocol: Autodetect
+Reset on emergency: Send emergency command + DTR high->low
+Receive cache size: 127
+Communication timeout: 40 [s]
+[ ] Use ping-pong communication (send only after OK)
+
+----- printer -----
+Travel feed rate: 9000 [mm/min]
+Z-axis feed rate: 120 [mm/min]
+Manual extrusion speed 2 - 20 mm/s
+Manual retraction speed 30 mm/s
+Default extruder temperature 190°C
+Default heat bed temperature 0°C
+[x] check extruder and bed temperature
+[ ] remove temperature requests from log
+Check every 3 seconds
+Park position: X: 50  Y: 50  Z min: 0
+[x] Send ETA to printer display      [ ] go to park position after job/kill
+[x] disable extruder after job/kill  [x] disable heatbed after job/kill
+[x] disable motors after job/kill    [x] printer has SD card
+
+Add to comp. printing time: 8%
+Invert direction for [ ] X axis   [ ] Y axis  [ ] Z axis  [ ] flip X and Y
+
+----- extruder -----
+Number of extruder: 1
+Number of fans: 1
+Max extruder temperature: 250 °C
+Max bed temperature: 60 °C
+Max volume per second: 12 mm^3/s
+[ ] Printer has mixing extruder (one nozzle for all colors)
+
+Extruder 1
+Name:
+Diameter: 0.4 [mm] Temperature offset: 0 [°C]
+Color: Orange
+Offset X: 0    Offset Y: 0
+
+----- Printer Shape -----
+Printer type: Classic Printer
+Home X: 0 [mm]   Home Y: 100 [mm]  Home Z: 0 [mm]
+X min: 0 [mm]  X max: 100 [mm]  Bed left:  -1 [mm] *** for palm: X max: 98
+Y min: 0 [mm]  Y max: 100 [mm]  Bed right: -3 [mm]
+Print area width:  100 mm
+Print area depth:  100 mm
+Print area height: 100 mm
+
+----- Advanced ------
+Filter Path and Parameter:
+[zleveler.py --inputfile=#in --outputfile=#out --updown_threshold=-0.0 --updown=-0.0 --zoffset=-0.06]
+[x] Run Filter after every Slice

@@ -1,0 +1,149 @@
+[print]
+name = Fab2mini-DevilDesign-PETG-print
+defaultQuality = L9s1K6gkRWBIsOMYpP3AfqHIwGBGGReF
+travelSpeedMin = 150
+travelSpeedMax = 150
+firstLayerSpeedMin = 7
+firstLayerSpeedMax = 7.1
+infillSpeedMin = 12
+infillSpeedMax = 60
+skinSpeedMin = 12
+skinSpeedMax = 60
+infillType = 2
+innerPerimeterMin = 12
+innerPerimeterMax = 60
+outerPerimeterMin = 12
+outerPerimeterMax = 60
+printSpeedMin = 12
+printSpeedMax = 60
+nozzleDiameter = 0
+gcodeFlavour = 0
+retractionCombing = True
+combing = 1
+multiVolumeOverlap = 0
+cutOffObjectBottom = 0
+shellThickness = 0.8
+infillTopBottomThickness = 0.6
+infillDensityPercent = 20
+supportType = 0
+platformAdhesion = 0
+dualExtrusion = 0
+wipeAndPrimeTower = True
+oozeShield = False
+enableRetraction = True
+retractionSpeed = 60
+retractionDistance = 3
+multiExtruderSwitchAmount = 16
+startGCode = """
+; Start code for Fabrikator ][ mini filament PETG
+M201 X9000 Y9000 Z2000 E9000; mm/s^2 max printing Acceleration
+M203 Z2; mm/s max Z-Speed
+;M204 P4000 R4000 T5000; mm/s^2 max Acceleration P=print R=retract T=travel
+; leaving P and R default works good with retract 3mm
+M204 T5000; mm/s^2 max Acceleration P=print R=retract T=travel
+G28 ; Home extruder
+G1 Z5 F{Z_TRAVEL_SPEED}
+M107 ; Turn off fan
+G90 ; Absolute positioning
+M82 ; Extruder in absolute mode
+; Activate all used extruder
+M107 ; Turn off fan
+{IF_EXT0}M104 T0 S{TEMP0}
+G92 E0 ; Reset extruder position
+M107 ; Turn off fan
+; NOZZLE to 140 preheat
+{IF_EXT0}M109 T0 S140
+; NOZZLE down to bed, blob position
+G0 X0 Y-1 Z0.26 F12000
+; heat bed
+{IF_BED}M190 S{BED}
+; Wait for all used extruders to reach temperature
+{IF_EXT0}M109 T0 S{TEMP0}
+; nozzle cleaning
+G1 E8 F30 ; blob creation
+G1 X50 E13 F240 ; slowly move and extrude to get rid of initial oozing
+G92 E0; reset extruder
+;G0 E-3 F9000 ; retract to avoid stringing
+;G0 X55 F9000 ; move 5 mm to cut off string
+;G0 E0 F9000 ; push filament at 0 mm, force restart extrusion
+;G92 E0 ; reset extruder
+"""
+endGCode = """
+; Default end code
+G92 E0; Reset extruder position
+G0 X0 Y100; Get extruder out of way. Uncomment to use!
+G0 E-4; Reduce filament pressure
+M107 ; Turn off fan
+; Disable all extruder
+G91 ; Relative positioning
+;{IF_EXT0}T0
+;{IF_EXT0}G1 E-1 F10; Reduce filament pressure
+M104 T0 S0
+G90 ; Absolute positioning
+G92 E0 ; Reset extruder position
+M140 S0 ; Disable heated bed
+M84 ; Turn steppers off
+M555 P1; Reboot WiFi chip
+"""
+preSwitchExtruderCode = 
+postSwitchExtruderCode = 
+wipeAndPrimeTowerVolume = 15
+retractionMinimumTravel = 1.5
+minimumExtrusionBeforeRetract = 0.02
+zhop = 0
+skirtLineCount = 0
+skirtDistance = 3
+skirtMinimumLength = 0
+solidInfillTop = True
+solidInfillBottom = True
+infillOverlapPercent = 15
+supportStructureType = 0
+supportOverhang = 60
+supportFillPercent = 15
+supportDistanceXY = 0.7
+supportDistanceZ = 0.15
+supportExtruder = -1
+spiralizeOuterContour = False
+brimWidth = 5
+raftExtraMargin = 5
+raftLineSpacing = 1
+raftBaseThickness = 0.3
+raftBaseWidth = 0.7
+raftInterfaceThickness = 0.2
+raftInterfaceLineWidth = 0.2
+raftAirGap = 0
+raftAirGapLayer0 = 0
+raftSurfaceLayer = 1
+fixCombineEverythingA = True
+fixCombineEverythingB = False
+fixKeepOpenFaces = False
+fixExtensiveStitching = False
+fanFullAtHeight = 1
+perimeterBeforeInfill = True
+minimumSpeed = 10
+coolHeadLift = False
+numQuality = 4
+[quality_0]
+name = 0.3 mm < 40 mm/s
+signature = QdDJ5B3tQ1NvU3GI0p46sb3kVBJOj7DY
+layerHeight = 0.3
+layer0widthPercent = 200
+firstLayerHeight = 0.3
+[quality_1]
+name = 0.2 mm < 60 mm/s
+signature = UcPGaRNJmVhRbWcfXPA4DjPFPi9DeoKS
+layerHeight = 0.2
+layer0widthPercent = 200
+firstLayerHeight = 0.3
+[quality_2]
+name = 0.15 mm < 60 mm/s
+signature = Pq2w1ev3J1J9sa6Hj7xjbpVnZz54mVHY
+layerHeight = 0.15
+layer0widthPercent = 200
+firstLayerHeight = 0.3
+[quality_3]
+name = 0.1 mm < 60 mm/s
+signature = L9s1K6gkRWBIsOMYpP3AfqHIwGBGGReF
+layerHeight = 0.1
+layer0widthPercent = 200
+firstLayerHeight = 0.3
