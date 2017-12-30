@@ -1,0 +1,54 @@
+This is my collection of useful G-code commands for Fabrikator ][ mini.
+It has "Malyan" firmware running on some STM32.
+
+To obtain config in memory, use command M503:
+
+M503
+
+echo:Steps per unit:
+echo:  M92 X93.00 Y93.00 Z1097.50 E97.00
+echo:Maximum feedrates (mm/s):
+echo:  M203 X150.00 Y150.00 Z1.50 E50.00
+echo:Maximum Acceleration (mm/s2):
+echo:  M201 X800 Y800 Z20 E10000
+echo:Accelerations: P=printing, R=retract and T=travel
+echo:  M204 P1500.00 R3000.00 T1500.00
+echo:Advanced variables:
+S=Min feedrate (mm/s),
+T=Min travel feedrate (mm/s),
+B=minimum segment time (ms),
+X=maximum XY jerk (mm/s),
+Z=maximum Z jerk (mm/s),
+E=maximum E jerk (mm/s)
+echo:  M205 S0.00 T0.00 B20000 X20.00 Z0.40 E5.00
+echo:Home offset (mm):
+echo:  M206 X0.00 Y0.00 Z0.00
+echo:Invert axis: M562 XYZE
+XYZABCD-+-+---
+echo:PID settings:
+echo:  M301 P20.00 I0.02 D250.00 C100.00 L20
+echo:  M304 P10.00 I0.02 D305.40
+echo:Filament settings: Disabled
+echo:  M200 D1.75
+echo:  M200 D0
+ok N0 P15 B15
+
+To change parameters, please type command according to above prompt. Example:
+
+M92 X100 Y100
+
+To save changed parameters, use command M500.
+
+M550 	Get/Set SSID
+M551 	Get/Set Password
+M552 	Display IP address
+M555 P1 	Reset WiFi interface (reboots WiFi module)
+M556 	Display network status
+M560 	Update firmware using update.bin in microSD card
+M561 	Change thermistor type (Hotend and/or Heat bed)
+M562 	Invert stepper motor direction
+M563 	Enable faster WiFi file uploads
+M564 	Download gcode from remote server
+M565 	Print cached file cache.gc
+M566 	Rename cache.gc
+M600 	Pause/Resume 
